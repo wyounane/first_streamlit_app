@@ -38,7 +38,8 @@ import snowflake.connector
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
-my_cur.execute(USE ROLE <"ACCOUNTADMIN">)
+#my_cur.execute(USE ROLE <"ACCOUNTADMIN">)
+my_cur.execute("use role {snowrole};".format(snowrole='ACCOUNTADMIN')
 my_cur.execute("select CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION(), CURRENT_ROLE()")
 my_data_row = my_cur.fetchone()
 streamlit.text("Hello from Snowflake:")
